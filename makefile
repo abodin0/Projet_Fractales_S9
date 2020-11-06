@@ -1,13 +1,13 @@
 TARGET 		= fractal
 
 CC			= g++
-#NVCC 		= nvcc
+NVCC 		= nvcc
 LINKER		= g++
 
-#CUDA_INSTALL_PATH ?= /usr/local/cuda
+CUDA_INSTALL_PATH = /usr/local/cuda
 
-#INCD 		= -I$(CUDA_INSTALL_PATH)/include
-#LIBS 		= -L$(CUDA_INSTALL_PATH)/lib -lcudart
+INCD 		= -I$(CUDA_INSTALL_PATH)/include
+LIBS 		= -L$(CUDA_INSTALL_PATH)/lib -lcudart
 
 CFLAGS		= -O3 -std=c++11 -march=native -mtune=native -fopenmp -I/opt/local/include -I./src 
 #NFLAGS 		= -O3 -arch=compute_32 -std=c++11 
@@ -27,11 +27,11 @@ SOURCES		=	src/main.cpp \
 				src/Utils/StringUtils.cpp \
 				src/Utils/Utils.cpp
 
-#SOURCES_CU 	:= $(wildcard $(SRCDIR)/*.cu)
+SOURCES_CU 	:= $(wildcard $(SRCDIR)/*.cu)
 INCLUDES	:= $(wildcard $(SRCDIR)/*.h)
 #INCLUDES_CU 	:= $(wildcard $(SRCDIR)/*.cuh)
 OBJECTS		:= $(SOURCES:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
-#OBJECTS_CU 	:= $(SOURCES_CU:$(SRCDIR)/%.cu=$(OBJDIR)/%.cuo)
+OBJECTS_CU 	:= $(SOURCES_CU:$(SRCDIR)/%.cu=$(OBJDIR)/%.cuo)
 rm			= rm -f
 
 all: $(BINDIR)/$(TARGET)
@@ -42,8 +42,8 @@ $(BINDIR)/$(TARGET): $(OBJECTS_CU) $(OBJECTS)
 $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.cpp
 	@$(CC) $(CFLAGS) $(INCD) -c $< -o $@
 
-#$(OBJECTS_CU): $(OBJDIR)/%.cuo : $(SRCDIR)/%.cu
-#	@$(NVCC) $(NFLAGS) $(INCD) -c $< -o $@
+$(OBJECTS_CU): $(OBJDIR)/%.cuo : $(SRCDIR)/%.cu
+	@$(NVCC) $(NFLAGS) $(INCD) -c $< -o $@
 
 .PHONY: clean
 clean:
