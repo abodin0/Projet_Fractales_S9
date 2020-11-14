@@ -24,6 +24,7 @@ void Mandelbrot::allocRessources( ){
     else
         c = converge.get();
 
+    //cout << "Nombre d'iterations = " << params->Iterations() << endl;
     c->setIters( params->Iterations() );
     c->setColor( colors );
 }

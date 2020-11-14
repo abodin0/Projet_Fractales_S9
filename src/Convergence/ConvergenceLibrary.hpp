@@ -6,6 +6,7 @@
 #include <string>
 
 #include "double/Convergence_dp_x86.hpp"
+#include "m256d/Convergence_m256d_x86.hpp"
 
 class ConvergenceLibrary {
 private:
@@ -22,7 +23,9 @@ public:
         //
         //
         //
-        list.push_back( new Convergence_dp_x86                (nullptr, 255) );
+        list.push_back( new Convergence_dp_x86(nullptr, 255) );
+        list.push_back( new Convergence_m256d_x86(nullptr, 255) );
+
 
         //
         //

@@ -22,6 +22,7 @@ SOURCES		=	src/main.cpp \
 				src/Color/ColorSmooth/ColorSmooth.cpp \
 				src/Convergence/Convergence.cpp \
 				src/Convergence/double/Convergence_dp_x86.cpp \
+				src/Convergence/m256d/Convergence_m256d_x86.cpp \
 				src/Utils/FileHandler.cpp \
 				src/Utils/Settings.cpp \
 				src/Utils/StringUtils.cpp \
