@@ -40,7 +40,7 @@ public:
 
     void Update();
 
-    void updateImage(const long double zoom, const long double offsetX, const long double offsetY, sf::Image& image);
+    void updateImage(int nblocks, int nthreads, const long double zoom, const long double offsetX, const long double offsetY, uint32_t * deviceTab);
 
     void nextColorMap();
     void previousColorMap();

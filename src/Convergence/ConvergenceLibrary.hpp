@@ -5,7 +5,7 @@
 #include <map>
 #include <string>
 
-#include "double/Convergence_dp_x86.hpp"
+#include "double/Convergence_dp_x86.cuh"
 
 class ConvergenceLibrary {
 private:

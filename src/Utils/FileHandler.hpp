@@ -14,8 +14,8 @@
 #include "Settings.hpp"
 #include "StringUtils.hpp"
 
-#include "Color/ColorMap.hpp"
-#include "Convergence/Convergence.hpp"
+#include "../Color/ColorMap.hpp"
+#include "../Convergence/Convergence.hpp"
 
 #ifndef FILEHANDLER_H_
 #define FILEHANDLER_H_

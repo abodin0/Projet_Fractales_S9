@@ -18,11 +18,27 @@
 
 #define LONG_OPTION 0
 
+inline bool CUDA_MALLOC( void ** devPtr, size_t size ) {
+	cudaError_t cudaStatus;
+	cudaStatus = cudaMalloc( devPtr, size );
+	if ( cudaStatus != cudaSuccess ) {
+		printf( "error: unable to allocate buffer\n");
+		return false;
+	}
+	return true;
+}
+
+inline bool CUDA_MEMCPY( void * dst, const void * src, size_t count, enum cudaMemcpyKind kind ) {
+	cudaError_t cudaStatus;
+	cudaStatus = cudaMemcpy( dst, src, count, kind );
+	if ( cudaStatus != cudaSuccess ) {
+		printf( "error: unable to copy buffer\n");
+		return false;
+	}
+	return true;
+}
 
 int main(int argc, char* argv[]) {
-
-    cudaError_t cudaStatus;
-    cudaStatus = cudaSetDevice( 0 );
 
     //
     // Parse parameters file :
@@ -177,6 +193,23 @@ int main(int argc, char* argv[]) {
     image.create(parameters.Width(), parameters.Height(), sf::Color(0, 0, 0));
     sf::Texture texture;
     sf::Sprite sprite;
+
+    uint32_t * hostTab = NULL;
+    uint32_t * deviceTab = NULL;
+
+    int nb_point = parameters.Width()*parameters.Height();
+    int nthreads = 1024;
+    int nblocks = ( n + ( nthreads - 1 ) ) / nthreads;
+    
+    hostTab = (uint32_t*)malloc(sizeof(uint32_t)*nb_point);
+
+    cudaError_t = cudaStatus;
+    cudaStatus = cudaSetDevice(0);
+    if ( cudaStatus != cudaSuccess ) {
+		printf( "error: unable to setup cuda device\n");
+	}
+
+    CUDA_MALLOC((void**)&deviceTab, nb_point * sizeof(uint32_t));
 
     bool stateChanged = true; // track whether the image needs to be regenerated
 //    sf::Clock clicTime;
@@ -371,7 +404,17 @@ int main(int argc, char* argv[]) {
 
         if (stateChanged) {
             std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-            mb.updateImage(zoom, offsetX, offsetY, image);
+            mb.updateImage(nblocks, nthreads, zoom, offsetX, offsetY, deviceTab);
+
+            CUDA_MEMCPY(hostTab, deviceTab, nb_point*sizeof(uint32_t), cudaMemcpyDeviceToHost);
+            for(int y = 0; y < parameters.Width(); y++)
+            {
+                for(int x = 0; x < parameters.Height(); x++)
+                {
+                    image.setPixel(x, y, colors->getColor(hostTab[x+y*parameters.Width()]));
+                }
+            }
+
             std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
             if (!parameters.autoZoom) std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() <<std::endl;
             texture.loadFromImage(image);

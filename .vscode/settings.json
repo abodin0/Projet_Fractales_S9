@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "*.cu": "cpp"
+        "*.cu": "cpp",
+        "chrono": "cpp"
     }
 }
