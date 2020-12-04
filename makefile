@@ -24,10 +24,10 @@ SOURCES		=	src/main.cpp \
 				src/Utils/FileHandler.cpp \
 				src/Utils/Settings.cpp \
 				src/Utils/StringUtils.cpp \
-				src/Utils/Utils.cpp
-				#src/Convergence/double/Convergence_dp_x86.cpp \
+				src/Utils/Utils.cpp \
+				src/Convergence/double/Convergence_GPU.cpp
 
-SOURCES_CU 	:= src/Convergence/double/Convergence_dp_x86.cu 
+SOURCES_CU 	:= src/Convergence/double/Calcul_GPU.cu 
 #			   $(wildcard $(SRCDIR)/*.cu)
 INCLUDES	:= $(wildcard $(SRCDIR)/*.h)
 INCLUDES_CU := $(wildcard $(SRCDIR)/*.cuh)

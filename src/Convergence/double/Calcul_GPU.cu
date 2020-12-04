@@ -1,25 +1,25 @@
-#include "Convergence_dp_x86.cuh"
+#include "Calcul_GPU.cuh"
 #include "cuda.h"
 
-Convergence_dp_x86::Convergence_dp_x86() : Convergence("DP")
+Calcul_GPU::Calcul_GPU() : Convergence("GPU")
 {
 
 }
 
 
-Convergence_dp_x86::Convergence_dp_x86(ColorMap* _colors, int _max_iters) : Convergence("DP")
+Calcul_GPU::Calcul_GPU(ColorMap* _colors, int _max_iters) : Convergence("GPU")
 {
     colors    = _colors;
     max_iters = _max_iters;
 }
 
 
-Convergence_dp_x86::~Convergence_dp_x86( ){
+Calcul_GPU::~Calcul_GPU( ){
 
 }
 
 
-__global__ void kernel_updateImage(const long double _zoom, const long double _offsetX, const long double _offsetY, const int IMAGE_WIDTH, const int IMAGE_HEIGHT, uint32_t * deviceTab, int max_iters)
+__global__ void kernel_updateImage_GPU(const long double _zoom, const long double _offsetX, const long double _offsetY, const int IMAGE_WIDTH, const int IMAGE_HEIGHT, uint32_t * deviceTab, int max_iters)
 {
     int i = blockIdx.x * blockDim.x + threadIdx.x;
     int nb_point = IMAGE_WIDTH * IMAGE_HEIGHT;
@@ -53,12 +53,11 @@ __global__ void kernel_updateImage(const long double _zoom, const long double _o
       }
 
       deviceTab[x+y*IMAGE_WIDTH] = value;
-      //image.setPixel(x, y, colors->getColor(value));
       startReal += zoom;
     }
 }
 
-void Convergence_dp_x86::updateImage(int nblocks, int nthreads, const long double _zoom, const long double _offsetX, const long double _offsetY, const int IMAGE_WIDTH, const int IMAGE_HEIGHT, uint32_t * deviceTab)
+void Calcul_GPU::updateImage_GPU(int nblocks, int nthreads, const long double _zoom, const long double _offsetX, const long double _offsetY, const int IMAGE_WIDTH, const int IMAGE_HEIGHT, uint32_t * deviceTab, int max_iters)
 {
-  kernel_updateImage<<<nblocks, nthreads>>>(_zoom, _offsetX, _offsetY, IMAGE_WIDTH, IMAGE_HEIGHT, deviceTab, 255);
+  kernel_updateImage_GPU<<<nblocks, nthreads>>>(_zoom, _offsetX, _offsetY, IMAGE_WIDTH, IMAGE_HEIGHT, deviceTab, max_iters);
 }

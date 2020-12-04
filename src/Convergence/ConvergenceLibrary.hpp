@@ -5,7 +5,8 @@
 #include <map>
 #include <string>
 
-#include "double/Convergence_dp_x86.cuh"
+#include "double/Convergence_dp_x86.hpp"
+#include "double/Convergence_GPU.hpp"
 
 class ConvergenceLibrary {
 private:
@@ -22,7 +23,8 @@ public:
         //
         //
         //
-        list.push_back( new Convergence_dp_x86                (nullptr, 255) );
+        list.push_back( new Convergence_dp_x86 (nullptr, 255) );
+        list.push_back( new Convergence_GPU    (nullptr, 255) );
 
         //
         //

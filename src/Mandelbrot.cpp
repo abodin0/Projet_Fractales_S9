@@ -87,9 +87,9 @@ void Mandelbrot::previousConvergence(){
 //
 //
 //
-void Mandelbrot::updateImage(int nblocks, int nthreads, const long double zoom, const long double offsetX, const long double offsetY, uint32_t * deviceTab) {
+void Mandelbrot::updateImage(const long double zoom, const long double offsetX, const long double offsetY, sf::Image& image) {
 
-    c->updateImage(nblocks, nthreads, zoom, offsetX, offsetY, params->Width(), params->Height(), deviceTab);
+    c->updateImage(zoom, offsetX, offsetY, params->Width(), params->Height(), image);
 
     if (params->isCentralDotEnabled) {
         sf::Color white(255, 255, 255);

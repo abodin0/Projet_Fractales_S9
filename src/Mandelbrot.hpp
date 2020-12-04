@@ -30,6 +30,7 @@ private:
 //    unsigned int max_iters;
 
 public:
+
     Mandelbrot(Settings* p);
 
     ~Mandelbrot();
@@ -40,7 +41,7 @@ public:
 
     void Update();
 
-    void updateImage(int nblocks, int nthreads, const long double zoom, const long double offsetX, const long double offsetY, uint32_t * deviceTab);
+    void updateImage(const long double zoom, const long double offsetX, const long double offsetY, sf::Image& image);
 
     void nextColorMap();
     void previousColorMap();

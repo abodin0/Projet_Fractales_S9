@@ -28,7 +28,7 @@ public:
 
     virtual ~Convergence();
 
-    virtual void updateImage(int nblocks, int nthreads, const long double d_zoom, const long double d_offsetX, const long double d_offsetY, const int IMAGE_WIDTH, const int IMAGE_HEIGHT, uint32_t * deviceTab) = 0;
+    virtual void updateImage(const long double d_zoom, const long double d_offsetX, const long double d_offsetY, const int IMAGE_WIDTH, const int IMAGE_HEIGHT, sf::Image& image) = 0;
 
     std::string name();
 
