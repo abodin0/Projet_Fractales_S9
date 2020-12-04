@@ -32,6 +32,7 @@ void Convergence_dp_x86::updateImage(const long double _zoom, const long double 
         double startReal = offsetX - IMAGE_WIDTH  / 2.0f * zoom;
 
         #pragma omp parallel for
+
         for (int x = 0; x < IMAGE_WIDTH;  x++) {
             int value    = max_iters - 1;
             double zReal = startReal;
@@ -47,6 +48,7 @@ void Convergence_dp_x86::updateImage(const long double _zoom, const long double 
                     break;
                 }
             }
+            //cout << value << endl;
             image.setPixel(x, y, colors->getColor(value));
             startReal += zoom;
         }
