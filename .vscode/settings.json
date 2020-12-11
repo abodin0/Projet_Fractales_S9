@@ -2,6 +2,7 @@
     "files.associations": {
         "*.cu": "cpp",
         "chrono": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "*.cuh": "cpp"
     }
 }

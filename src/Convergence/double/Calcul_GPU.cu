@@ -1,24 +1,6 @@
 #include "Calcul_GPU.cuh"
 #include "cuda.h"
 
-Calcul_GPU::Calcul_GPU() : Convergence("GPU")
-{
-
-}
-
-
-Calcul_GPU::Calcul_GPU(ColorMap* _colors, int _max_iters) : Convergence("GPU")
-{
-    colors    = _colors;
-    max_iters = _max_iters;
-}
-
-
-Calcul_GPU::~Calcul_GPU( ){
-
-}
-
-
 __global__ void kernel_updateImage_GPU(const long double _zoom, const long double _offsetX, const long double _offsetY, const int IMAGE_WIDTH, const int IMAGE_HEIGHT, uint32_t * deviceTab, int max_iters)
 {
     int i = blockIdx.x * blockDim.x + threadIdx.x;
@@ -31,6 +13,7 @@ __global__ void kernel_updateImage_GPU(const long double _zoom, const long doubl
 
     if(i<nb_point)
     {
+      /*
       x = i%IMAGE_WIDTH;
       y = (i-x)/IMAGE_WIDTH;
 
@@ -54,10 +37,15 @@ __global__ void kernel_updateImage_GPU(const long double _zoom, const long doubl
 
       deviceTab[x+y*IMAGE_WIDTH] = value;
       startReal += zoom;
+      */
+     deviceTab[x+y*IMAGE_WIDTH] = i%256;
     }
+    //printf("value (GPU) = %x \n", deviceTab[50+200*IMAGE_WIDTH]);
 }
 
+/*
 void Calcul_GPU::updateImage_GPU(int nblocks, int nthreads, const long double _zoom, const long double _offsetX, const long double _offsetY, const int IMAGE_WIDTH, const int IMAGE_HEIGHT, uint32_t * deviceTab, int max_iters)
 {
   kernel_updateImage_GPU<<<nblocks, nthreads>>>(_zoom, _offsetX, _offsetY, IMAGE_WIDTH, IMAGE_HEIGHT, deviceTab, max_iters);
 }
+*/

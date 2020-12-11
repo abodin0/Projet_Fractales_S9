@@ -23,6 +23,11 @@ public:
 
   virtual void updateImage(const long double _zoom, const long double _offsetX, const long double _offsetY, const int IMAGE_WIDTH, const int IMAGE_HEIGHT, sf::Image& image);
 
+private:
+
+    uint32_t * hostTab;
+    uint32_t * deviceTab;
+
 };
 
 #endif
