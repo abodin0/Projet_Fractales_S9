@@ -32,7 +32,7 @@ void Convergence_m256d_x86::updateImage(const long double _zoom, const long doub
 
     __m256d XStep = _mm256_set1_pd(simd * zoom);
 
-    #pragma omp parallel for
+    #pragma omp parallel for num_threads(std::thread::hardware_concurrency()) schedule(dynamic)
 
     for (int y = 0; y < IMAGE_HEIGHT; y++) {
 
@@ -43,7 +43,7 @@ void Convergence_m256d_x86::updateImage(const long double _zoom, const long doub
         __m256d startReal = _mm256_setr_pd(_startReal, _startReal + zoom, _startReal + 2.0 * zoom, _startReal + 3.0 * zoom);
 
 
-        #pragma omp parallel for
+        #pragma omp parallel for num_threads(std::thread::hardware_concurrency()) schedule(dynamic)
 
         for (int x = 0; x < IMAGE_WIDTH;  x += simd) {
             __m256i value = _mm256_set1_epi64x(0);
@@ -81,6 +81,7 @@ void Convergence_m256d_x86::updateImage(const long double _zoom, const long doub
             cout << _mm256_extract_epi64(value, 2) << endl;
             cout << _mm256_extract_epi64(value, 3) << endl;
             #endif
+
             image.setPixel(x  , y, colors->getColor(_mm256_extract_epi64(value, 0)));
             image.setPixel(x+1, y, colors->getColor(_mm256_extract_epi64(value, 1)));
             image.setPixel(x+2, y, colors->getColor(_mm256_extract_epi64(value, 2)));
