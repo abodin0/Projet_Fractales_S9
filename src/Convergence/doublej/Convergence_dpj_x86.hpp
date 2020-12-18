@@ -1,5 +1,5 @@
-#ifndef _Convergence_m256d_x86_
-#define _Convergence_m256d_x86_
+#ifndef _Convergence_dpj_x86_
+#define _Convergence_dpj_x86_
 
 #include <SFML/Graphics.hpp>
 #include <array>
@@ -7,19 +7,18 @@
 #include <thread>
 #include "immintrin.h"
 #include <omp.h>
-#include <thread>
 
 #include "../Convergence.hpp"
 
-class Convergence_m256d_x86 : public Convergence {
+class Convergence_dpj_x86 : public Convergence {
 
 public:
 
-  Convergence_m256d_x86();
+  Convergence_dpj_x86();
 
-  Convergence_m256d_x86(ColorMap* _colors, int _max_iters);
+  Convergence_dpj_x86(ColorMap* _colors, int _max_iters);
 
-  ~Convergence_m256d_x86( );
+  ~Convergence_dpj_x86( );
 
 //  virtual unsigned int process(const double startReal, const double startImag, unsigned int max_iters);
 

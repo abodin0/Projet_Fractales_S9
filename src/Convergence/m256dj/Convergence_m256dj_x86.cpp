@@ -1,24 +1,24 @@
-#include "Convergence_m256d_x86.hpp"
+#include "Convergence_m256dj_x86.hpp"
 
-Convergence_m256d_x86::Convergence_m256d_x86() : Convergence("M256D")
+Convergence_m256dj_x86::Convergence_m256dj_x86() : Convergence("M256D")
 {
 
 }
 
 
-Convergence_m256d_x86::Convergence_m256d_x86(ColorMap* _colors, int _max_iters) : Convergence("M256D")
+Convergence_m256dj_x86::Convergence_m256dj_x86(ColorMap* _colors, int _max_iters) : Convergence("M256D")
 {
     colors    = _colors;
     max_iters = _max_iters;
 }
 
 
-Convergence_m256d_x86::~Convergence_m256d_x86( ){
+Convergence_m256dj_x86::~Convergence_m256dj_x86( ){
 
 }
 
 
-void Convergence_m256d_x86::updateImage(const long double _zoom, const long double _offsetX, const long double _offsetY, const int IMAGE_WIDTH, const int IMAGE_HEIGHT, sf::Image& image)
+void Convergence_m256dj_x86::updateImage(const long double _zoom, const long double _offsetX, const long double _offsetY, const int IMAGE_WIDTH, const int IMAGE_HEIGHT, sf::Image& image)
 {
     double offsetX = _offsetX;
     double offsetY = _offsetX;
@@ -32,7 +32,8 @@ void Convergence_m256d_x86::updateImage(const long double _zoom, const long doub
 
     __m256d XStep = _mm256_set1_pd(simd * zoom);
 
-    #pragma omp parallel for num_threads(std::thread::hardware_concurrency()) schedule(dynamic)
+    #pragma omp parallel for num_threads(std::thread::hardware_concurrency())
+    //#pragma omp parallel for
 
     for (int y = 0; y < IMAGE_HEIGHT; y++) {
 
@@ -43,8 +44,7 @@ void Convergence_m256d_x86::updateImage(const long double _zoom, const long doub
         __m256d startReal = _mm256_setr_pd(_startReal, _startReal + zoom, _startReal + 2.0 * zoom, _startReal + 3.0 * zoom);
 
 
-
-        #pragma omp parallel for num_threads(std::thread::hardware_concurrency()) schedule(dynamic)
+        //#pragma omp parallel for
 
         for (int x = 0; x < IMAGE_WIDTH;  x += simd) {
             __m256i value = _mm256_set1_epi64x(0);
@@ -70,6 +70,9 @@ void Convergence_m256d_x86::updateImage(const long double _zoom, const long doub
 
                 value = _mm256_blendv_epi8(value, v, _mm256_castpd_si256(mask));
 
+                //__m256i mask = _mm256_castpd_si256 (_mm256_cmp_pd(add, _mm256_set1_pd(4), _CMP_GT_OS));
+                //value = _mm256_or_si256(_mm256_and_si256(value, mask), _mm256_andnot_si256(_mm256_sub_epi64(value, _mm256_set1_epi64x(1)), mask));
+
                 if(_mm256_movemask_pd(mask) == 0)
                     break;
             }
@@ -79,7 +82,6 @@ void Convergence_m256d_x86::updateImage(const long double _zoom, const long doub
             cout << _mm256_extract_epi64(value, 2) << endl;
             cout << _mm256_extract_epi64(value, 3) << endl;
             #endif
-
             image.setPixel(x  , y, colors->getColor(_mm256_extract_epi64(value, 0)));
             image.setPixel(x+1, y, colors->getColor(_mm256_extract_epi64(value, 1)));
             image.setPixel(x+2, y, colors->getColor(_mm256_extract_epi64(value, 2)));
