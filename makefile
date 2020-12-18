@@ -23,6 +23,7 @@ SOURCES		=	src/main.cpp \
 				src/Convergence/Convergence.cpp \
 				src/Convergence/double/Convergence_dp_x86.cpp \
 				src/Convergence/m256d/Convergence_m256d_x86.cpp \
+				src/Convergence/doublej/Convergence_dpj_x86.cpp \
 				src/Convergence/m128/Convergence_m128_x86.cpp \
 				src/Convergence/m256_float/Convergence_m256_float_x86.cpp \
 				src/Utils/FileHandler.cpp \
