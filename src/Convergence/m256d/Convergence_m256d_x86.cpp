@@ -42,10 +42,6 @@ void Convergence_m256d_x86::updateImage(const long double _zoom, const long doub
         __m256d startImag = _mm256_setr_pd(_startImag, _startImag, _startImag, _startImag);
         __m256d startReal = _mm256_setr_pd(_startReal, _startReal + zoom, _startReal + 2.0 * zoom, _startReal + 3.0 * zoom);
 
-
-
-        #pragma omp parallel for num_threads(std::thread::hardware_concurrency()) schedule(dynamic)
-
         for (int x = 0; x < IMAGE_WIDTH;  x += simd) {
             __m256i value = _mm256_set1_epi64x(0);
             __m256d zReal = startReal;
