@@ -6,11 +6,15 @@
 #include <string>
 
 #include "double/Convergence_dp_x86.hpp"
+#include "doublem/Convergence_dpm_x86.hpp"
 #include "m256d/Convergence_m256d_x86.hpp"
+#include "m256dm/Convergence_m256dm_x86.hpp"
 #include "doublej/Convergence_dpj_x86.hpp"
 #include "m128/Convergence_m128_x86.hpp"
+#include "m128j/Convergence_m128j_x86.hpp"
 #include "m256dj/Convergence_m256dj_x86.hpp"
 #include "m256_float/Convergence_m256_float_x86.hpp"
+#include "m256j_float/Convergence_m256j_float_x86.hpp"
 
 class ConvergenceLibrary {
 private:
@@ -29,10 +33,14 @@ public:
         //
         list.push_back( new Convergence_dp_x86(nullptr, 255));
         list.push_back( new Convergence_m256d_x86(nullptr, 255));
+        list.push_back( new Convergence_m128_x86(nullptr, 255));
+        list.push_back( new Convergence_m256_float_x86(nullptr, 255));
         list.push_back( new Convergence_dpj_x86(nullptr, 255));
-        list.push_back( new Convergence_m128_x86(nullptr, 255) );
         list.push_back( new Convergence_m256dj_x86(nullptr, 255));
-        list.push_back( new Convergence_m256_float_x86(nullptr, 255) );
+        list.push_back( new Convergence_m128j_x86(nullptr, 255));
+        list.push_back( new Convergence_m256j_float_x86(nullptr, 255));
+        list.push_back( new Convergence_dpm_x86(nullptr, 255));
+        list.push_back( new Convergence_m256dm_x86(nullptr, 255));
 
 
         //

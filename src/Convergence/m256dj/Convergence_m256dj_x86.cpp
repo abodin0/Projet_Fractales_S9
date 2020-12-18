@@ -81,9 +81,6 @@ void Convergence_m256dj_x86::updateImage(const long double _zoom, const long dou
             image.setPixel(x+1, y, colors->getColor(_mm256_extract_epi64(value, 1)));
             image.setPixel(x+2, y, colors->getColor(_mm256_extract_epi64(value, 2)));
             image.setPixel(x+3, y, colors->getColor(_mm256_extract_epi64(value, 3)));
-            //startReal = _mm256_add_pd(startReal, XStep);
-
-
         }
     }
 }
