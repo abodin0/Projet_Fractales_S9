@@ -10,6 +10,7 @@
 #include "doublej/Convergence_dpj_x86.hpp"
 #include "m128/Convergence_m128_x86.hpp"
 #include "m256dj/Convergence_m256dj_x86.hpp"
+#include "m256_float/Convergence_m256_float_x86.hpp"
 
 class ConvergenceLibrary {
 private:
@@ -31,6 +32,7 @@ public:
         list.push_back( new Convergence_dpj_x86(nullptr, 255));
         list.push_back( new Convergence_m128_x86(nullptr, 255) );
         list.push_back( new Convergence_m256dj_x86(nullptr, 255));
+        list.push_back( new Convergence_m256_float_x86(nullptr, 255) );
 
 
         //

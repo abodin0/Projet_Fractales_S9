@@ -6,6 +6,10 @@
 #include <iostream>
 #include <unistd.h>
 #include <sstream>
+#include <chrono>
+#include <ctime>
+#include <iomanip>
+#include <stdint.h>
 
 #include "Utils/Utils.hpp"
 #include "Utils/Settings.hpp"
@@ -256,6 +260,7 @@ int main(int argc, char* argv[]) {
                         case sf::Keyboard::Escape :
                             window.close();
                             break;
+
                         case sf::Keyboard::F12 :
                             dateString = dateTimeString();
                             image.saveToFile("img/Mandelbrot_"+dateString+".png");
@@ -314,6 +319,17 @@ int main(int argc, char* argv[]) {
                             mb.nextColorMap();
                             break;
 
+                        case sf::Keyboard::B :
+                        {
+                            std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+                            uint32_t q;
+                            for(q = 0; q < 64; q += 1)
+                                mb.updateImage(zoom, offsetX, offsetY, image);
+                            std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+                            std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() <<std::endl;
+                            break;
+                        }
+                        
                         default:
                             stateChanged = false;
                             break;
