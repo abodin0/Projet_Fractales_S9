@@ -20,6 +20,9 @@ BINDIR		= bin
 SOURCES		=	src/main.cpp \
 				src/Mandelbrot.cpp \
 				src/Color/ColorSmooth/ColorSmooth.cpp \
+				src/Color/Colorblue/Colorblue.cpp \
+				src/Color/Colorgreen/Colorgreen.cpp \
+				src/Color/Colorgrey/Colorgrey.cpp \
 				src/Convergence/Convergence.cpp \
 				src/Convergence/double/Convergence_dp_x86.cpp \
 				src/Convergence/doublem/Convergence_dpm_x86.cpp \
