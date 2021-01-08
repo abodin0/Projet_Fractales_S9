@@ -27,9 +27,11 @@ void Convergence_dp_x86::updateImage(const long double _zoom, const long double 
     for (int y = 0; y < IMAGE_HEIGHT; y++) {
 
         double startImag = offsetY - IMAGE_HEIGHT / 2.0f * zoom + (y * zoom);
-        double startReal = offsetX - IMAGE_WIDTH  / 2.0f * zoom;
 
         for (int x = 0; x < IMAGE_WIDTH;  x++) {
+
+            double startReal = offsetX - IMAGE_WIDTH  / 2.0f * zoom + (x * zoom);
+
             int value    = max_iters - 1;
             double zReal = startReal;
             double zImag = startImag;
@@ -39,13 +41,13 @@ void Convergence_dp_x86::updateImage(const long double _zoom, const long double 
                 double i2 = zImag * zImag;
                 zImag = 2.0f * zReal * zImag + startImag;
                 zReal = r2 - i2 + startReal;
+
                 if ( (r2 + i2) > 4.0f) {
                     value = counter;
                     break;
                 }
             }
             image.setPixel(x, y, colors->getColor(value));
-            startReal += zoom;
         }
     }
 }

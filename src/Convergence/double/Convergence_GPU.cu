@@ -56,20 +56,10 @@ void Convergence_GPU::updateImage(const long double _zoom, const long double _of
 {
     printf("Start GPU convergence\n");
     int nb_point = IMAGE_WIDTH*IMAGE_HEIGHT;
-    dim3 grid(75,25,1); //nbr bloc
+    dim3 grid(80,50,1); //nbr bloc
     dim3 block(16,16,1); //nbr threads
-
-/*
-    int nDevices;
-    cudaGetDeviceCount(&nDevices);
-    printf("Number of GPU : %d\n", nDevices);
-    for (int i = 0; i < nDevices; i++) {
-        cudaDeviceProp prop;
-        cudaGetDeviceProperties(&prop, i);
-        printf("Max grid size : %d\n", prop.maxGridSize);
-        printf("Max 2D surface : %d\n", prop.maxSurface2D);
-    }
-*/
+    int nthreads = 1024;
+    int nblocks = ( nb_point + ( nthreads - 1 ) ) / nthreads;
 
     if(hostTab == nullptr)
         hostTab = new uint32_t[nb_point];
@@ -77,7 +67,11 @@ void Convergence_GPU::updateImage(const long double _zoom, const long double _of
     if(deviceTab == nullptr)
         CUDA_MALLOC((void**)&deviceTab, nb_point * sizeof(uint32_t));
 
-    kernel_updateImage_GPU<<<grid, block>>>(_zoom, _offsetX, _offsetY, IMAGE_WIDTH, IMAGE_HEIGHT, deviceTab, max_iters);
+    double offsetX = _offsetX;
+    double offsetY = _offsetX;
+    double zoom    = _zoom;
+
+    kernel_updateImage_GPU<<<grid, block>>>(zoom, offsetX, offsetY, IMAGE_WIDTH, IMAGE_HEIGHT, deviceTab, max_iters);
 
     CUDA_MEMCPY(hostTab, deviceTab, nb_point*sizeof(uint32_t), cudaMemcpyDeviceToHost);
 

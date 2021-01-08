@@ -42,10 +42,10 @@ $(BINDIR)/$(TARGET): $(OBJECTS_CU) $(OBJECTS)
 	$(LINKER) -o $@ $(OBJECTS_CU) $(OBJECTS) $(INCD) $(LIBS) $(LFLAGS)
 
 $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.cpp
-	@$(CC) $(CFLAGS) $(INCD) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCD) -c $< -o $@
 
 $(OBJECTS_CU): $(OBJDIR)/%.cuo : $(SRCDIR)/%.cu
-	@$(NVCC) $(NFLAGS) $(INCD) -c $< -o $@
+	$(NVCC) $(NFLAGS) $(INCD) -c $< -o $@
 
 .PHONY: clean
 clean:
