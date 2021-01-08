@@ -15,6 +15,11 @@
 #include "m256dj/Convergence_m256dj_x86.hpp"
 #include "m256_float/Convergence_m256_float_x86.hpp"
 #include "m256j_float/Convergence_m256j_float_x86.hpp"
+#include "doublen/Convergence_dpn_x86.hpp"
+#include "double_n/Convergence_dp_n_x86.hpp"
+#include "doublebs/Convergence_dpbs_x86.hpp"
+#include "doublemr/Convergence_dpmr_x86.hpp"
+#include "doublemme/Convergence_dpmme_x86.hpp"
 
 class ConvergenceLibrary {
 private:
@@ -41,6 +46,11 @@ public:
         list.push_back( new Convergence_m256j_float_x86(nullptr, 255));
         list.push_back( new Convergence_dpm_x86(nullptr, 255));
         list.push_back( new Convergence_m256dm_x86(nullptr, 255));
+        list.push_back( new Convergence_dpn_x86(nullptr, 255));
+        list.push_back( new Convergence_dp_n_x86(nullptr, 255));
+        list.push_back( new Convergence_dpbs_x86(nullptr, 255));
+        list.push_back( new Convergence_dpmr_x86(nullptr, 255));
+        list.push_back( new Convergence_dpmme_x86(nullptr, 255));
 
 
         //

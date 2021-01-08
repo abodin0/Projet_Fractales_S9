@@ -31,6 +31,11 @@ SOURCES		=	src/main.cpp \
 				src/Convergence/m256_float/Convergence_m256_float_x86.cpp \
 				src/Convergence/m256j_float/Convergence_m256j_float_x86.cpp \
 				src/Convergence/m256dj/Convergence_m256dj_x86.cpp \
+				src/Convergence/doublen/Convergence_dpn_x86.cpp \
+				src/Convergence/double_n/Convergence_dp_n_x86.cpp \
+				src/Convergence/doublebs/Convergence_dpbs_x86.cpp \
+				src/Convergence/doublemr/Convergence_dpmr_x86.cpp \
+				src/Convergence/doublemme/Convergence_dpmme_x86.cpp \
 				src/Utils/FileHandler.cpp \
 				src/Utils/Settings.cpp \
 				src/Utils/StringUtils.cpp \

@@ -329,6 +329,30 @@ int main(int argc, char* argv[]) {
                             std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() <<std::endl;
                             break;
                         }
+
+                        case sf::Keyboard::Numpad2 :
+                        {
+                            offsetY += 10 * zoom;
+                            break;
+                        }
+
+                        case sf::Keyboard::Numpad4 :
+                        {
+                            offsetX -= 10 * zoom;
+                            break;
+                        }
+
+                        case sf::Keyboard::Numpad6 :
+                        {
+                            offsetX += 10 * zoom;
+                            break;
+                        }
+
+                        case sf::Keyboard::Numpad8 :
+                        {
+                            offsetY -= 10 * zoom;
+                            break;
+                        }
                         
                         default:
                             stateChanged = false;
