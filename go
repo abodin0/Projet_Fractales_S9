@@ -1,0 +1,1 @@
+make remove && make -j4 && ./bin/fractal

@@ -54,7 +54,6 @@ Convergence_GPU::~Convergence_GPU( ){
 
 void Convergence_GPU::updateImage(const long double _zoom, const long double _offsetX, const long double _offsetY, const int IMAGE_WIDTH, const int IMAGE_HEIGHT, sf::Image& image)
 {
-    printf("Start GPU convergence\n");
     int nb_point = IMAGE_WIDTH*IMAGE_HEIGHT;
     dim3 grid(80,50,1); //nbr bloc
     dim3 block(16,16,1); //nbr threads
@@ -83,5 +82,4 @@ void Convergence_GPU::updateImage(const long double _zoom, const long double _of
             image.setPixel(x, y, colors->getColor(hostTab[x+y*IMAGE_WIDTH]));
         }
     }
-    printf("Stop GPU convergence\n");
 }
