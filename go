@@ -1,1 +1,1 @@
-make remove && make -j4 && ./bin/fractal
+make remove && make -j8 && ./bin/fractal

@@ -6,7 +6,7 @@
 #include <string>
 
 #include "double/Convergence_dp_x86.hpp"
-#include "double/Convergence_GPU.hpp"
+#include "double_gpu/Convergence_GPU.hpp"
 
 class ConvergenceLibrary {
 private:
