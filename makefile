@@ -34,7 +34,9 @@ SOURCES_CU 	:= src/Convergence/double_gpu/kernel_GPU.cu \
 			   src/Convergence/double_gpu_julia/kernel_GPU_julia.cu \
 			   src/Convergence/double_gpu_julia/Convergence_GPU_julia.cu \
 			   src/Convergence/double_gpu_multibrot/kernel_GPU_multibrot.cu \
-			   src/Convergence/double_gpu_multibrot/Convergence_GPU_multibrot.cu
+			   src/Convergence/double_gpu_multibrot/Convergence_GPU_multibrot.cu \
+			   src/Convergence/double_gpu_mme/kernel_GPU_mme.cu \
+			   src/Convergence/double_gpu_mme/Convergence_GPU_mme.cu
 #			   $(wildcard $(SRCDIR)/*.cu)
 INCLUDES	:= $(wildcard $(SRCDIR)/*.h)
 INCLUDES_CU := $(wildcard $(SRCDIR)/*.cuh)
