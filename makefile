@@ -27,10 +27,12 @@ SOURCES		=	src/main.cpp \
 				src/Utils/Utils.cpp \
 				src/Convergence/double/Convergence_dp_x86.cpp
 
-SOURCES_CU 	:= src/Convergence/double_gpu/Calcul_GPU.cu \
+SOURCES_CU 	:= src/Convergence/double_gpu/kernel_GPU.cu \
 			   src/Convergence/double_gpu/Convergence_GPU.cu \
-			   src/Convergence/float_gpu/Calcul_GPU_float.cu \
-			   src/Convergence/float_gpu/Convergence_GPU_float.cu
+			   src/Convergence/float_gpu/kernel_GPU_float.cu \
+			   src/Convergence/float_gpu/Convergence_GPU_float.cu \
+			   src/Convergence/double_gpu_julia/kernel_GPU_julia.cu \
+			   src/Convergence/double_gpu_julia/Convergence_GPU_julia.cu
 #			   $(wildcard $(SRCDIR)/*.cu)
 INCLUDES	:= $(wildcard $(SRCDIR)/*.h)
 INCLUDES_CU := $(wildcard $(SRCDIR)/*.cuh)

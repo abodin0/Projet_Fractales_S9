@@ -1,5 +1,5 @@
-#ifndef _Calcul_GPU_float
-#define _Calcul_GPU_float
+#ifndef _kernel_GPU_float
+#define _kernel_GPU_float
 
 #include <cstdint>
 #include <stdio.h>

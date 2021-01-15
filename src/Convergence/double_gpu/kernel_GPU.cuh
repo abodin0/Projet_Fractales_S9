@@ -1,5 +1,5 @@
-#ifndef _Calcul_GPU
-#define _Calcul_GPU
+#ifndef _kernel_GPU
+#define _kernel_GPU
 
 #include <cstdint>
 #include <stdio.h>

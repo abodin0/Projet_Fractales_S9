@@ -1,5 +1,5 @@
 #include "Convergence_GPU.hpp"
-#include "Calcul_GPU.cuh"
+#include "kernel_GPU.cuh"
 
 #include "cuda_runtime.h"
 
