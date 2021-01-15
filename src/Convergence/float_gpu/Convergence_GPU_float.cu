@@ -1,5 +1,5 @@
-#include "Convergence_GPU.hpp"
-#include "Calcul_GPU.cuh"
+#include "Convergence_GPU_float.hpp"
+#include "Calcul_GPU_float.cuh"
 
 #include "cuda_runtime.h"
 
@@ -23,13 +23,13 @@ inline bool CUDA_MEMCPY( void * dst, const void * src, size_t count, enum cudaMe
 	return true;
 }
 
-Convergence_GPU::Convergence_GPU() : Convergence("GPU_double")
+Convergence_GPU_float::Convergence_GPU_float() : Convergence("GPU_float")
 {
 
 }
 
 
-Convergence_GPU::Convergence_GPU(ColorMap* _colors, int _max_iters) : Convergence("GPU_double")
+Convergence_GPU_float::Convergence_GPU_float(ColorMap* _colors, int _max_iters) : Convergence("GPU_float")
 {
     colors    = _colors;
     max_iters = _max_iters;
@@ -46,13 +46,13 @@ Convergence_GPU::Convergence_GPU(ColorMap* _colors, int _max_iters) : Convergenc
 }
 
 
-Convergence_GPU::~Convergence_GPU( ){
+Convergence_GPU_float::~Convergence_GPU_float(){
      cudaError_t cudaStatus = cudaDeviceReset();
      free(hostTab);
      free(deviceTab);
 }
 
-void Convergence_GPU::updateImage(const long double _zoom, const long double _offsetX, const long double _offsetY, const int IMAGE_WIDTH, const int IMAGE_HEIGHT, sf::Image& image)
+void Convergence_GPU_float::updateImage(const long double _zoom, const long double _offsetX, const long double _offsetY, const int IMAGE_WIDTH, const int IMAGE_HEIGHT, sf::Image& image)
 {
     int nb_point = IMAGE_WIDTH*IMAGE_HEIGHT;
     dim3 grid(80,50,1); //nbr bloc
@@ -66,11 +66,11 @@ void Convergence_GPU::updateImage(const long double _zoom, const long double _of
     if(deviceTab == nullptr)
         CUDA_MALLOC((void**)&deviceTab, nb_point * sizeof(uint32_t));
 
-    double offsetX = _offsetX;
-    double offsetY = _offsetX;
-    double zoom    = _zoom;
+    float offsetX = _offsetX;
+    float offsetY = _offsetX;
+    float zoom    = _zoom;
 
-    kernel_updateImage_GPU<<<grid, block>>>(zoom, offsetX, offsetY, IMAGE_WIDTH, IMAGE_HEIGHT, deviceTab, max_iters);
+    kernel_updateImage_GPU_float<<<grid, block>>>(zoom, offsetX, offsetY, IMAGE_WIDTH, IMAGE_HEIGHT, deviceTab, max_iters);
 
     CUDA_MEMCPY(hostTab, deviceTab, nb_point*sizeof(uint32_t), cudaMemcpyDeviceToHost);
 

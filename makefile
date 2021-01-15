@@ -28,7 +28,9 @@ SOURCES		=	src/main.cpp \
 				src/Convergence/double/Convergence_dp_x86.cpp
 
 SOURCES_CU 	:= src/Convergence/double_gpu/Calcul_GPU.cu \
-			   src/Convergence/double_gpu/Convergence_GPU.cu 
+			   src/Convergence/double_gpu/Convergence_GPU.cu \
+			   src/Convergence/float_gpu/Calcul_GPU_float.cu \
+			   src/Convergence/float_gpu/Convergence_GPU_float.cu
 #			   $(wildcard $(SRCDIR)/*.cu)
 INCLUDES	:= $(wildcard $(SRCDIR)/*.h)
 INCLUDES_CU := $(wildcard $(SRCDIR)/*.cuh)

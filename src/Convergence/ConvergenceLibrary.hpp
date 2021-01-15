@@ -7,6 +7,7 @@
 
 #include "double/Convergence_dp_x86.hpp"
 #include "double_gpu/Convergence_GPU.hpp"
+#include "float_gpu/Convergence_GPU_float.hpp"
 
 class ConvergenceLibrary {
 private:
@@ -23,9 +24,9 @@ public:
         //
         //
         //
-        list.push_back( new Convergence_dp_x86 (nullptr, 255) );
-        list.push_back( new Convergence_GPU    (nullptr, 255) );
-
+        list.push_back( new Convergence_dp_x86    (nullptr, 255));
+        list.push_back( new Convergence_GPU       (nullptr, 255));
+        list.push_back( new Convergence_GPU_float (nullptr, 255));
         //
         //
         //
