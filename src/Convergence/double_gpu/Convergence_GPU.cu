@@ -57,8 +57,6 @@ void Convergence_GPU::updateImage(const long double _zoom, const long double _of
     int nb_point = IMAGE_WIDTH*IMAGE_HEIGHT;
     dim3 grid(80,50,1); //nbr bloc
     dim3 block(16,16,1); //nbr threads
-    int nthreads = 1024;
-    int nblocks = ( nb_point + ( nthreads - 1 ) ) / nthreads;
 
     if(hostTab == nullptr)
         hostTab = new uint32_t[nb_point];
