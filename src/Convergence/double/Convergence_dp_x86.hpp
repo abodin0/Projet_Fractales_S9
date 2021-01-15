@@ -6,6 +6,7 @@
 #include <vector>
 #include <thread>
 #include "immintrin.h"
+#include <omp.h>
 
 #include "../Convergence.hpp"
 

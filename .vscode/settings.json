@@ -4,5 +4,23 @@
         "chrono": "cpp",
         "iostream": "cpp",
         "*.cuh": "cpp"
+        "array": "cpp",
+        "*.tcc": "cpp",
+        "functional": "cpp",
+        "memory": "cpp",
+        "tuple": "cpp",
+        "fstream": "cpp",
+        "istream": "cpp",
+        "limits": "cpp",
+        "ostream": "cpp",
+        "numeric": "cpp",
+        "sstream": "cpp",
+        "streambuf": "cpp",
+        "thread": "cpp",
+        "utility": "cpp",
+        "optional": "cpp",
+        "ratio": "cpp",
+        "system_error": "cpp",
+        "type_traits": "cpp"
     }
 }

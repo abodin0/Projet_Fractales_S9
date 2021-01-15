@@ -13,6 +13,20 @@
 #include "double_gpu_mme/Convergence_GPU_mme.hpp"
 #include "double_gpu_ship/Convergence_GPU_ship.hpp"
 #include "double_gpu_mr/Convergence_GPU_mr.hpp"
+#include "doublem/Convergence_dpm_x86.hpp"
+#include "m256d/Convergence_m256d_x86.hpp"
+#include "m256dm/Convergence_m256dm_x86.hpp"
+#include "doublej/Convergence_dpj_x86.hpp"
+#include "m128/Convergence_m128_x86.hpp"
+#include "m128j/Convergence_m128j_x86.hpp"
+#include "m256dj/Convergence_m256dj_x86.hpp"
+#include "m256_float/Convergence_m256_float_x86.hpp"
+#include "m256j_float/Convergence_m256j_float_x86.hpp"
+#include "doublen/Convergence_dpn_x86.hpp"
+#include "double_n/Convergence_dp_n_x86.hpp"
+#include "doublebs/Convergence_dpbs_x86.hpp"
+#include "doublemr/Convergence_dpmr_x86.hpp"
+#include "doublemme/Convergence_dpmme_x86.hpp"
 
 class ConvergenceLibrary {
 private:
@@ -28,15 +42,41 @@ public:
 
         //
         //
-        //
-        list.push_back( new Convergence_dp_x86        (nullptr, 255));
-        list.push_back( new Convergence_GPU           (nullptr, 255));
-        list.push_back( new Convergence_GPU_float     (nullptr, 255));
-        list.push_back( new Convergence_GPU_julia     (nullptr, 255));
-        list.push_back( new Convergence_GPU_multibrot (nullptr, 255));
-        list.push_back( new Convergence_GPU_mme       (nullptr, 255));
-        list.push_back( new Convergence_GPU_mr        (nullptr, 255));
-        list.push_back( new Convergence_GPU_ship      (nullptr, 255));
+        // Mandelbrot
+        list.push_back( new Convergence_dp_x86          (nullptr, 255));
+        list.push_back( new Convergence_m256d_x86       (nullptr, 255));
+        list.push_back( new Convergence_m256_float_x86  (nullptr, 255));
+        list.push_back( new Convergence_m128_x86        (nullptr, 255));
+        list.push_back( new Convergence_GPU             (nullptr, 255));
+        list.push_back( new Convergence_GPU_float       (nullptr, 255));
+
+        // Julia
+        list.push_back( new Convergence_dpj_x86         (nullptr, 255));
+        list.push_back( new Convergence_m256dj_x86      (nullptr, 255));
+        list.push_back( new Convergence_m256j_float_x86 (nullptr, 255));
+        list.push_back( new Convergence_m128j_x86       (nullptr, 255));
+        list.push_back( new Convergence_GPU_julia       (nullptr, 255));
+
+        // Multibrot
+        list.push_back( new Convergence_dpm_x86         (nullptr, 255));
+        list.push_back( new Convergence_m256dm_x86      (nullptr, 255));
+        list.push_back( new Convergence_GPU_multibrot   (nullptr, 255));
+        
+        // Burning ship
+        list.push_back( new Convergence_dpbs_x86        (nullptr, 255));
+        list.push_back( new Convergence_GPU_ship        (nullptr, 255));
+
+        // Madame
+        list.push_back( new Convergence_dpmme_x86       (nullptr, 255));
+        list.push_back( new Convergence_GPU_mme         (nullptr, 255));
+
+        // Monsieur
+        list.push_back( new Convergence_dpmr_x86        (nullptr, 255));
+        list.push_back( new Convergence_GPU_mr          (nullptr, 255));
+        
+        // n ?
+        list.push_back( new Convergence_dpn_x86         (nullptr, 255));
+        list.push_back( new Convergence_dp_n_x86        (nullptr, 255));
         //
         //
         //

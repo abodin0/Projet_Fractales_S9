@@ -7,6 +7,9 @@
 
 #include "ColorMap.hpp"
 #include "ColorSmooth/ColorSmooth.hpp"
+#include "Colorgreen/Colorgreen.hpp"
+#include "Colorblue/Colorblue.hpp"
+#include "Colorgrey/Colorgrey.hpp"
 
 class ColorLibrary {
 private:
@@ -22,6 +25,9 @@ public:
 
         //
         list.push_back( new ColorSmooth    () );
+        list.push_back( new Colorblue      () );
+        list.push_back( new Colorgreen     () );
+        list.push_back( new Colorgrey      () );
 
         //
         //

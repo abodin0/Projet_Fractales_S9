@@ -24,9 +24,13 @@ void Convergence_dp_x86::updateImage(const long double _zoom, const long double 
     double offsetY = _offsetX;
     double zoom    = _zoom;
 
+    //pragma omp parallel for
+
     for (int y = 0; y < IMAGE_HEIGHT; y++) {
 
         double startImag = offsetY - IMAGE_HEIGHT / 2.0f * zoom + (y * zoom);
+
+        //pragma omp parallel for
 
         for (int x = 0; x < IMAGE_WIDTH;  x++) {
 
