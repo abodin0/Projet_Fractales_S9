@@ -12,6 +12,7 @@
 #include "double_gpu_multibrot/Convergence_GPU_multibrot.hpp"
 #include "double_gpu_mme/Convergence_GPU_mme.hpp"
 #include "double_gpu_ship/Convergence_GPU_ship.hpp"
+#include "double_gpu_mr/Convergence_GPU_mr.hpp"
 
 class ConvergenceLibrary {
 private:
@@ -34,6 +35,7 @@ public:
         list.push_back( new Convergence_GPU_julia     (nullptr, 255));
         list.push_back( new Convergence_GPU_multibrot (nullptr, 255));
         list.push_back( new Convergence_GPU_mme       (nullptr, 255));
+        list.push_back( new Convergence_GPU_mr        (nullptr, 255));
         list.push_back( new Convergence_GPU_ship      (nullptr, 255));
         //
         //
