@@ -26,6 +26,7 @@ void Convergence_m256dm_x86::updateImage(const long double _zoom, const long dou
 
     __m256i one = _mm256_set1_epi64x(1);
     __m256d two = _mm256_set1_pd(2);
+    __m256d three = _mm256_set1_pd(3);
     __m256d four = _mm256_set1_pd(4);
 
     const int simd = sizeof(__m256d) / sizeof(double);
@@ -51,12 +52,18 @@ void Convergence_m256dm_x86::updateImage(const long double _zoom, const long dou
                 __m256d r2 = _mm256_mul_pd (zReal, zReal);
                 __m256d i2 = _mm256_mul_pd (zImag, zImag);
 
-                __m256d mul1 = _mm256_mul_pd (zReal, zImag);
-                __m256d mul2 = _mm256_mul_pd (two, mul1);
-                zImag = _mm256_add_pd (mul2, startImag);
+                __m256d r3 = _mm256_mul_pd (r2, zReal);
+                __m256d i3 = _mm256_mul_pd (i2, zImag);
 
-                __m256d sub = _mm256_sub_pd (r2, i2);
-                zReal = _mm256_add_pd (sub, startReal);
+                __m256d mul1 = _mm256_mul_pd (r2, zImag);
+                __m256d mul2 = _mm256_mul_pd (three, mul1);
+                __m256d sub1 = _mm256_sub_pd (mul2, i3);
+                zImag = _mm256_add_pd (sub1, startImag);
+
+                __m256d mul3 = _mm256_mul_pd (i2, zReal);
+                __m256d mul4 = _mm256_mul_pd (three, mul3);
+                __m256d sub2 = _mm256_sub_pd (r3, mul4);
+                zReal = _mm256_add_pd (sub2, startReal);
 
                 __m256d add = _mm256_add_pd(r2, i2);
                 __m256i v = _mm256_add_epi64(value, one);
