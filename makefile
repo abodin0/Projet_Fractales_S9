@@ -26,6 +26,7 @@ SOURCES		=	src/main.cpp \
 				src/Color/Colorgrey/Colorgrey.cpp \
 				src/Convergence/Convergence.cpp \
 				src/Convergence/double/Convergence_dp_x86.cpp \
+				src/Convergence/double_dp_omp_x86/Convergence_dp_omp_x86.cpp \
 				src/Convergence/doublem/Convergence_dpm_x86.cpp \
 				src/Convergence/m256d/Convergence_m256d_x86.cpp \
 				src/Convergence/m256dm/Convergence_m256dm_x86.cpp \

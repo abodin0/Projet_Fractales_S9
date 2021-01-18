@@ -328,7 +328,8 @@ int main(int argc, char* argv[]) {
                             for(q = 0; q < 64; q += 1)
                                 mb.updateImage(zoom, offsetX, offsetY, image);
                             std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-                            std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() <<std::endl;
+                            //std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() <<std::endl;
+                            std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() <<std::endl;
                             break;
                         }
 
@@ -412,7 +413,8 @@ int main(int argc, char* argv[]) {
             std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
             mb.updateImage(zoom, offsetX, offsetY, image);
             std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-            if (!parameters.autoZoom) std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() <<std::endl;
+            //if (!parameters.autoZoom) std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() <<std::endl;
+            if (!parameters.autoZoom) std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() <<std::endl;
             texture.loadFromImage(image);
             sprite.setTexture(texture);
             stateChanged = false;
