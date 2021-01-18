@@ -9,7 +9,7 @@ LINKER		= g++
 #INCD 		= -I$(CUDA_INSTALL_PATH)/include
 #LIBS 		= -L$(CUDA_INSTALL_PATH)/lib -lcudart
 
-CFLAGS		= -O3 -std=c++11 -march=native -mtune=native -fopenmp -I/opt/local/include -I./src
+CFLAGS		= -O3 -std=c++17 -march=native -mtune=native -fopenmp -I/opt/local/include -I./src
 #NFLAGS 		= -O3 -arch=compute_32 -std=c++11
 LFLAGS		= -Wall -I. -L/opt/local/lib -lm -fopenmp -lsfml-graphics -lsfml-window -lsfml-system
 
@@ -32,6 +32,7 @@ SOURCES		=	src/main.cpp \
 				src/Convergence/m128/Convergence_m128_x86.cpp \
 				src/Convergence/m128j/Convergence_m128j_x86.cpp \
 				src/Convergence/m256_float/Convergence_m256_float_x86.cpp \
+				src/Convergence/m256f_vect/Convergence_m256f_vect.cpp \
 				src/Convergence/m256j_float/Convergence_m256j_float_x86.cpp \
 				src/Convergence/m256dj/Convergence_m256dj_x86.cpp \
 				src/Utils/FileHandler.cpp \

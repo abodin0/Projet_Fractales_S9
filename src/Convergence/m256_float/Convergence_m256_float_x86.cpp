@@ -1,6 +1,6 @@
 #include "Convergence_m256_float_x86.hpp"
 
-Convergence_m256_float_x86::Convergence_m256_float_x86() : Convergence("M256D_FLOAT")
+Convergence_m256_float_x86::Convergence_m256_float_x86() : Convergence("M256_FLOAT")
 {
 
 }
