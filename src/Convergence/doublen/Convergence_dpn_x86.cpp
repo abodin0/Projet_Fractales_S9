@@ -1,5 +1,5 @@
 #include "Convergence_dpn_x86.hpp"
-#define n 3
+#define n -5
 
 Convergence_dpn_x86::Convergence_dpn_x86() : Convergence("DPN")
 {
